@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-// const postSchema = require('./post')
+const postSchema = require('./post')
 const blogSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -13,7 +13,7 @@ const blogSchema = new mongoose.Schema({
   borderColor: {
     type: String
   },
-  // posts: [postSchema],
+  posts: [postSchema],
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
