@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-// const imageLikeSchema = require('./imageLike')
+const imageLikeSchema = require('./imageLike')
 
 const imageSchema = new mongoose.Schema({
   tag: {
@@ -15,7 +15,7 @@ const imageSchema = new mongoose.Schema({
     required: true
   },
 
-  // imageLikes: [imageLikeSchema],
+  imageLikes: [imageLikeSchema],
 
   price: {
     type: Number

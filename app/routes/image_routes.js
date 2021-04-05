@@ -27,14 +27,14 @@ router.get('/my-images', requireToken, (req, res, next) => {
 
 // CREATE
 // POST /image/
-router.post('/images', requireToken, (req, res, next) => {
-  req.body.image.owner = req.user.id
-  Image.create(req.body.image)
-    .then(image => {
-      res.status(201).json({ image: image.toObject() })
-    })
-    .catch(next)
-})
+// router.post('/images', requireToken, (req, res, next) => {
+//   req.body.image.owner = req.user.id
+//   Image.create(req.body.image)
+//     .then(image => {
+//       res.status(201).json({ image: image.toObject() })
+//     })
+//     .catch(next)
+// })
 
 // GET /image/:id
 router.get('/images/:id', requireToken, (req, res, next) => {
@@ -45,16 +45,16 @@ router.get('/images/:id', requireToken, (req, res, next) => {
 })
 
 // PATCH /image/:id
-router.patch('/images/:id', requireToken, removeBlanks, (req, res, next) => {
-  delete req.body.image.owner
-  Image.findById(req.params.id)
-    .then(image => {
-      requireOwnership(req, image)
-      return image.updateOne(req.body.image)
-    })
-    .then(image => res.sendStatus(204).json({ image: image }))
-    .catch(next)
-})
+// router.patch('/images/:id', requireToken, removeBlanks, (req, res, next) => {
+//   delete req.body.image.owner
+//   Image.findById(req.params.id)
+//     .then(image => {
+//       requireOwnership(req, image)
+//       return image.updateOne(req.body.image)
+//     })
+//     .then(image => res.sendStatus(204).json({ image: image }))
+//     .catch(next)
+// })
 
 // DESTROY
 // DELETE /image/:id
