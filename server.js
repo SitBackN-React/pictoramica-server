@@ -52,6 +52,49 @@ app.use(cors({ origin: process.env.CLIENT_ORIGIN || `http://localhost:${clientDe
 // define port for API to run on
 const port = process.env.PORT || serverDevPort
 
+// STRIPE
+// Sets up the server side endpoint to create the Checkout session
+// Implements secret key
+const stripe = require('stripe')(process.env.STRIPE_SECRET)
+
+app.use(express.static('.'))
+
+// app.post('/checkout', async (req, res) => {
+// // const paymentIntent = await stripe.paymentIntents.create({
+// //     amount: 1000,
+// //     currency: 'usd',
+// //     payment_method_types: ['card'],
+// //     receipt_email: 'jenny.rosen@example.com'
+// // })
+// // console.log(paymentIntent)
+// })
+
+const YOUR_DOMAIN = `http://localhost:${clientDevPort}/#/`
+
+app.post('/create-checkout-session', async (req, res) => {
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items: [
+      {
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: 'Image',
+            images: ['']
+          },
+          unit_amount: 20
+        },
+        quantity: 1
+      }
+    ],
+    mode: 'payment',
+    success_url: `${YOUR_DOMAIN}?success=true`,
+    cancel_url: `${YOUR_DOMAIN}?canceled=true`
+  })
+
+  res.json({ id: session.id })
+})
+
 // register passport authentication middleware
 app.use(auth)
 
