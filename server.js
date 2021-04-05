@@ -15,6 +15,8 @@ const imageRoutes = require('./app/routes/image_routes')
 const awsRoutes = require('./app/routes/aws_routes')
 const imageLikeRoutes = require('./app/routes/imageLike_routes')
 
+const cartItemRoutes = require('./app/routes/cartItem_routes')
+
 // require middleware
 const errorHandler = require('./lib/error_handler')
 const requestLogger = require('./lib/request_logger')
@@ -74,6 +76,8 @@ app.use(postLikeRoutes)
 app.use(imageRoutes)
 app.use(awsRoutes)
 app.use(imageLikeRoutes)
+
+app.use(cartItemRoutes)
 
 // register error handling middleware
 // note that this comes after the route middlewares, because it needs to be
