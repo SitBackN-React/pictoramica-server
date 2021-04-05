@@ -96,6 +96,7 @@ jspm_packages
 
 # Environmental variables
 .env
+variables.env
 
 # End of https://www.gitignore.io/api/node
 *.bak
